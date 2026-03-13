@@ -49,21 +49,42 @@ function loadTeamMembers() {
 function initializeCounters() {
     const stats = document.querySelectorAll('.stat-card h3');
     stats.forEach(stat => {
-        const target = parseInt(stat.textContent);
-        animateCounter(stat, target);
+        const raw = (stat.textContent || '').trim();
+        const parsed = parseCounter(raw);
+        if (!parsed) return;
+        animateCounter(stat, parsed.target, parsed.format);
     });
 }
 
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 50;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target + (element.textContent.includes('+') ? '+' : '');
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : '');
-        }
-    }, 30);
+function parseCounter(raw) {
+    if (!raw) return null;
+    if (raw.includes('/')) return null; // e.g., "24/7" shouldn't animate
+
+    const hasPlus = raw.includes('+');
+    const hasK = /k/i.test(raw);
+    const num = Number.parseFloat(raw.replace(/[^0-9.]/g, ''));
+    if (!Number.isFinite(num)) return null;
+
+    const target = hasK ? num * 1000 : num;
+    const format = (value) => {
+        if (hasK) return `${Math.round(value / 1000)}K${hasPlus ? '+' : ''}`;
+        return `${Math.round(value)}${hasPlus ? '+' : ''}`;
+    };
+
+    return { target, format };
+}
+
+function animateCounter(element, target, format) {
+    const durationMs = 900;
+    const start = performance.now();
+
+    function step(now) {
+        const progress = Math.min(1, (now - start) / durationMs);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = target * eased;
+        element.textContent = format(current);
+        if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
 }

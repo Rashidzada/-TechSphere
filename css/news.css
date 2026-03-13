@@ -112,3 +112,15 @@
     color: #475569;
     margin-bottom: 1rem;
 }
+
+@media (max-width: 900px) {
+    .breaking-news {
+        padding: 1rem 1.25rem;
+    }
+
+    .news-filters select {
+        flex: 1 1 220px;
+        min-width: 0;
+        width: 100%;
+    }
+}

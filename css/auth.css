@@ -225,3 +225,30 @@
     color: #333;
     border-color: #333;
 }
+
+@media (max-width: 900px) {
+    .auth-main {
+        min-height: auto;
+        padding: 1.25rem 0;
+    }
+
+    .auth-card {
+        padding: 1.75rem;
+        border-radius: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-page {
+        max-width: 100%;
+    }
+
+    .auth-card {
+        padding: 1.25rem;
+        border-radius: 22px;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+    }
+}

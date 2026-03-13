@@ -9,13 +9,17 @@
     <link rel="stylesheet" href="css/contact.css">
 </head>
 <body>
+    <a class="skip-link" href="#content">Skip to content</a>
     <!-- Header Component -->
     <header>
         <div class="header-container">
-            <div class="logo-area">
+            <a class="logo-area" href="index.html" aria-label="TechSphere home">
                 <i class="fas fa-microchip logo-icon"></i>
                 <div class="logo-text">Tech<span>Sphere</span></div>
-            </div>
+            </a>
+            <button class="mobile-menu-btn" type="button" aria-label="Toggle menu" aria-controls="mainNav" aria-expanded="false">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
             <nav class="nav-links" id="mainNav">
                 <a href="index.html"><i class="fas fa-home"></i> Home</a>
                 <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
@@ -31,7 +35,7 @@
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main id="content">
         <h1 class="page-title"><i class="fas fa-envelope"></i> Contact Us</h1>
         
         <div class="contact-container">
