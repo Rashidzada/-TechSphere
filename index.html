@@ -1,109 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechSphere - Home | Tech Blog & News</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' },
+                        dark: { 900: '#0f172a', 800: '#1e293b', 700: '#334155' }
+                    },
+                    animation: { 'float': 'float 3s ease-in-out infinite', 'gradient': 'gradient 8s linear infinite', 'fade-in-up': 'fadeInUp 0.6s ease-out forwards' },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        gradient: { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
+                    },
+                    boxShadow: { 'glow': '0 0 40px rgba(59, 130, 246, 0.5)', 'glow-lg': '0 0 60px rgba(59, 130, 246, 0.6)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3); }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
-<body>
-    <a class="skip-link" href="#content">Skip to content</a>
-    <!-- Header Component -->
-    <header>
-        <div class="header-container">
-            <a class="logo-area" href="index.html" aria-label="TechSphere home">
-                <i class="fas fa-microchip logo-icon"></i>
-                <div class="logo-text">Tech<span>Sphere</span></div>
-            </a>
-            <button class="mobile-menu-btn" type="button" aria-label="Toggle menu" aria-controls="mainNav" aria-expanded="false">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
-            <nav class="nav-links" id="mainNav">
-                <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
-                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-                <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
-                <a href="news.html"><i class="fas fa-newspaper"></i> News</a>
-                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
-            </nav>
-            <div class="auth-buttons">
-                <a href="login.html" class="login"><i class="fas fa-sign-in-alt"></i> Log in</a>
-                <a href="signup.html" class="signup"><i class="fas fa-user-plus"></i> Sign up</a>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen flex flex-col font-sans antialiased">
+    <a href="#content" class="sr-only focus:not-sr-only fixed top-4 left-4 z-50 bg-brand-600 text-white px-6 py-3 rounded-xl font-semibold">Skip to content</a>
+    
+    <header class="sticky top-0 z-50 glass border-b border-white/20 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-3 group" aria-label="TechSphere home">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                        <i class="fas fa-microchip text-white text-xl"></i>
+                    </div>
+                    <div class="text-2xl font-bold tracking-tight"><span class="text-dark-900">Tech</span><span class="gradient-text">Sphere</span></div>
+                </a>
+                
+                <nav class="hidden md:flex items-center gap-2">
+                    <a href="index.html" class="nav-item active px-5 py-2.5 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 bg-brand-500 text-white"><i class="fas fa-home"></i><span>Home</span></a>
+                    <a href="about.html" class="nav-item px-5 py-2.5 rounded-xl font-medium text-dark-700 hover:text-brand-600 hover:bg-brand-50 transition-all duration-300 flex items-center gap-2"><i class="fas fa-info-circle"></i><span>About</span></a>
+                    <a href="blog.html" class="nav-item px-5 py-2.5 rounded-xl font-medium text-dark-700 hover:text-brand-600 hover:bg-brand-50 transition-all duration-300 flex items-center gap-2"><i class="fas fa-blog"></i><span>Blog</span></a>
+                    <a href="news.html" class="nav-item px-5 py-2.5 rounded-xl font-medium text-dark-700 hover:text-brand-600 hover:bg-brand-50 transition-all duration-300 flex items-center gap-2"><i class="fas fa-newspaper"></i><span>News</span></a>
+                    <a href="contact.html" class="nav-item px-5 py-2.5 rounded-xl font-medium text-dark-700 hover:text-brand-600 hover:bg-brand-50 transition-all duration-300 flex items-center gap-2"><i class="fas fa-envelope"></i><span>Contact</span></a>
+                </nav>
+                
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="login.html" class="px-6 py-2.5 rounded-xl font-semibold border-2 border-brand-500 text-brand-600 hover:bg-brand-500 hover:text-white transition-all duration-300 flex items-center gap-2"><i class="fas fa-sign-in-alt"></i><span>Log in</span></a>
+                    <a href="signup.html" class="px-6 py-2.5 rounded-xl font-semibold bg-gradient-to-r from-brand-500 to-purple-600 text-white hover:shadow-glow transition-all duration-300 flex items-center gap-2 hover:scale-105"><i class="fas fa-user-plus"></i><span>Sign up</span></a>
+                </div>
+                
+                <button class="md:hidden mobile-menu-btn w-12 h-12 rounded-xl bg-dark-900/10 hover:bg-dark-900/20 transition-all duration-300 flex items-center justify-center" type="button" aria-label="Toggle menu"><i class="fas fa-bars text-dark-900 text-xl"></i></button>
             </div>
+            
+            <nav id="mainNav" class="md:hidden hidden pb-4">
+                <div class="flex flex-col gap-2 pt-4 border-t border-dark-900/10">
+                    <a href="index.html" class="nav-item active px-5 py-3 rounded-xl font-medium bg-brand-500 text-white flex items-center gap-3"><i class="fas fa-home"></i>Home</a>
+                    <a href="about.html" class="nav-item px-5 py-3 rounded-xl font-medium text-dark-700 hover:bg-brand-50 flex items-center gap-3"><i class="fas fa-info-circle"></i>About</a>
+                    <a href="blog.html" class="nav-item px-5 py-3 rounded-xl font-medium text-dark-700 hover:bg-brand-50 flex items-center gap-3"><i class="fas fa-blog"></i>Blog</a>
+                    <a href="news.html" class="nav-item px-5 py-3 rounded-xl font-medium text-dark-700 hover:bg-brand-50 flex items-center gap-3"><i class="fas fa-newspaper"></i>News</a>
+                    <a href="contact.html" class="nav-item px-5 py-3 rounded-xl font-medium text-dark-700 hover:bg-brand-50 flex items-center gap-3"><i class="fas fa-envelope"></i>Contact</a>
+                    <div class="flex gap-2 pt-2">
+                        <a href="login.html" class="flex-1 px-5 py-3 rounded-xl font-semibold border-2 border-brand-500 text-brand-600 hover:bg-brand-500 hover:text-white flex items-center justify-center gap-2"><i class="fas fa-sign-in-alt"></i>Log in</a>
+                        <a href="signup.html" class="flex-1 px-5 py-3 rounded-xl font-semibold bg-gradient-to-r from-brand-500 to-purple-600 text-white flex items-center justify-center gap-2"><i class="fas fa-user-plus"></i>Sign up</a>
+                    </div>
+                </div>
+            </nav>
         </div>
     </header>
-
-    <!-- Main Content -->
-    <main id="content">
-        <section class="hero-section">
-            <h1 class="page-title"><i class="fas fa-home"></i> Welcome to TechSphere</h1>
-            <div class="hero-content">
-                <h2>Explore the future of <span class="highlight">technology</span></h2>
-                <p class="hero-text">Fresh insights, deep dives, and breaking news from the tech world. Join thousands of developers, engineers, and tech enthusiasts who trust our daily content.</p>
-                <div class="hero-buttons">
-                    <a href="blog.html" class="btn btn-primary">Explore Blog <i class="fas fa-arrow-right"></i></a>
-                    <a href="news.html" class="btn btn-secondary">Latest News <i class="fas fa-newspaper"></i></a>
+    
+    <main id="content" class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section class="relative mb-16 animate-on-scroll">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl blur-3xl"></div>
+            <div class="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/50 shadow-2xl overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-brand-500/20 to-purple-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/20 to-pink-500/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+                <div class="relative">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-8 flex items-center gap-3"><i class="fas fa-home gradient-text"></i><span class="gradient-text">Welcome to TechSphere</span></h1>
+                    <div class="max-w-3xl">
+                        <h2 class="text-3xl md:text-4xl font-bold text-dark-900 mb-4 leading-tight">Explore the future of <span class="gradient-text">technology</span></h2>
+                        <p class="text-lg text-dark-700 mb-8 leading-relaxed">Fresh insights, deep dives, and breaking news from the tech world. Join thousands of developers, engineers, and tech enthusiasts who trust our daily content.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="blog.html" class="group px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-500 to-purple-600 text-white font-semibold shadow-lg hover:shadow-glow-lg transition-all duration-300 hover:scale-105 flex items-center gap-3"><span>Explore Blog</span><i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i></a>
+                            <a href="news.html" class="px-8 py-4 rounded-2xl border-2 border-brand-500 text-brand-600 font-semibold hover:bg-brand-500 hover:text-white transition-all duration-300 hover:scale-105 flex items-center gap-3"><i class="fas fa-newspaper"></i><span>Latest News</span></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="features-section">
-            <h2 class="section-title">What We Cover</h2>
-            <div class="card-grid" id="home-features">
-                <!-- Features will be loaded via JavaScript -->
-            </div>
+        <section class="mb-16 animate-on-scroll">
+            <h2 class="text-3xl md:text-4xl font-bold text-dark-900 mb-8 flex items-center gap-3"><span class="w-2 h-10 bg-gradient-to-b from-brand-500 to-purple-600 rounded-full"></span>What We Cover</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="home-features"></div>
         </section>
 
-        <section class="trending-section">
-            <h2 class="section-title">Trending Topics</h2>
-            <div class="trending-grid" id="trending-topics">
-                <!-- Trending topics will be loaded via JavaScript -->
-            </div>
+        <section class="animate-on-scroll">
+            <h2 class="text-3xl md:text-4xl font-bold text-dark-900 mb-8 flex items-center gap-3"><span class="w-2 h-10 bg-gradient-to-b from-purple-500 to-pink-600 rounded-full"></span>Trending Topics</h2>
+            <div class="flex flex-wrap gap-3" id="trending-topics"></div>
         </section>
     </main>
 
-    <!-- Footer Component -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <h4>TechSphere</h4>
-                <ul>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="news.html">Tech news</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="login.html">Account</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+    <footer class="bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-slate-400 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center"><i class="fas fa-microchip text-white"></i></div><div class="text-xl font-bold"><span class="text-white">Tech</span><span class="gradient-text">Sphere</span></div></div>
+                    <p class="text-sm mb-4">Your trusted source for technology news, insights, and tutorials.</p>
                 </div>
-                <p class="footer-email"><i class="fas fa-envelope"></i> hello@techsphere.dev</p>
+                <div>
+                    <h4 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-compass text-brand-500"></i>Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>About us</a></li>
+                        <li><a href="blog.html" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>Blog</a></li>
+                        <li><a href="news.html" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>Tech news</a></li>
+                        <li><a href="contact.html" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-headset text-brand-500"></i>Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>FAQ</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>Terms of Service</a></li>
+                        <li><a href="login.html" class="hover:text-brand-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i>Account</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-share-nodes text-brand-500"></i>Connect</h4>
+                    <div class="flex gap-3 mb-4">
+                        <a href="#" class="w-10 h-10 rounded-xl bg-dark-700 hover:bg-brand-500 flex items-center justify-center transition-all duration-300 hover:scale-110"><i class="fab fa-twitter text-white"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-dark-700 hover:bg-brand-500 flex items-center justify-center transition-all duration-300 hover:scale-110"><i class="fab fa-github text-white"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-dark-700 hover:bg-brand-500 flex items-center justify-center transition-all duration-300 hover:scale-110"><i class="fab fa-linkedin text-white"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-dark-700 hover:bg-brand-500 flex items-center justify-center transition-all duration-300 hover:scale-110"><i class="fab fa-discord text-white"></i></a>
+                    </div>
+                    <p class="flex items-center gap-2 text-sm"><i class="fas fa-envelope text-brand-500"></i>hello@techsphere.dev</p>
+                </div>
             </div>
-        </div>
-        <div class="copyright">
-            &copy; 2026 TechSphere — where tomorrow's code meets today. All rights reserved.
+            <div class="border-t border-dark-700 pt-8 text-center text-sm">&copy; 2026 TechSphere - where tomorrow's code meets today. All rights reserved.</div>
         </div>
     </footer>
+    
+    <a href="https://wa.me/923469997435" target="_blank" rel="noopener noreferrer" class="fixed right-6 bottom-6 w-14 h-14 rounded-full bg-gradient-to-br from-green-400 to-green-600 text-white flex items-center justify-center shadow-2xl hover:shadow-glow-lg transition-all duration-300 hover:scale-110 z-50 group" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp text-3xl"></i>
+        <span class="absolute right-full mr-3 px-3 py-2 bg-dark-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">WhatsApp: +92 346 9997435</span>
+    </a>
 
+    <script>
+        document.querySelector('.mobile-menu-btn')?.addEventListener('click', function() { const nav = document.getElementById('mainNav'); nav.classList.toggle('hidden'); });
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    </script>
     <script src="js/main.js"></script>
     <script src="js/home.js"></script>
-
-    <a class="whatsapp-float" href="https://wa.me/923469997435" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp: +92 346 9997435" data-tooltip="WhatsApp: +92 346 9997435">
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-    </a>
 </body>
 </html>
