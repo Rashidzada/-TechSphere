@@ -122,6 +122,11 @@ header.header--compact {
     color: inherit;
 }
 
+.logo-area,
+.logo-area * {
+    text-decoration: none !important;
+}
+
 .logo-icon {
     font-size: 2rem;
     color: var(--brand);
